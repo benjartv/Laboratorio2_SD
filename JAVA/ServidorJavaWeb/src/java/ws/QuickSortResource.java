@@ -13,7 +13,7 @@ import javax.ws.rs.Produces;
 
 /**
  * REST Web Service
- *
+ * ref: http://www.programcreek.com/2012/11/quicksort-array-in-java/
  * @author roberto
  */
 @Path("quick")

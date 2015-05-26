@@ -19,7 +19,7 @@ import javax.ws.rs.Produces;
 
 /**
  * REST Web Service
- *
+ * ref: http://mathbits.com/MathBits/Java/arrays/Bubble.htm
  * @author roberto
  */
 @Path("bubble")

@@ -13,9 +13,11 @@ import javax.ws.rs.Produces;
 
 /**
  * REST Web Service
- *
+ * ref: http://www.it.uc3m.es/tsps/lab/8/skel/MergeSort.java
  * @author roberto
  */
+
+
 @Path("merge")
 public class MergeSortResource {
 
