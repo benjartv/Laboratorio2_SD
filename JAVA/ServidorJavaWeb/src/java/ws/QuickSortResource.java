@@ -7,11 +7,7 @@ package ws;
 
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 
@@ -44,10 +40,8 @@ public class QuickSortResource {
         Float[] arregloFlotante = new Float[arreglo.length];
         for (int i = 0; i < arreglo.length; i++) {
             arregloFlotante[i] = Float.parseFloat(arreglo[i]);
-            
-            
         }
-        quickSort(arregloFlotante,0,arregloFlotante.length-1);
+        quickSort(arregloFlotante,0,(arregloFlotante.length)-1);
         String resp = "";
         for (int i = 0; i < arregloFlotante.length; i++) {
             resp = resp + arregloFlotante[i].toString()+";";
@@ -68,7 +62,7 @@ public class QuickSortResource {
  
 		//pick the pivot
 		int middle = low + (high - low) / 2;
-		int pivot = arr[middle].intValue();
+		float pivot = arr[middle];
  
 		//make left < pivot and right > pivot
 		int i = low, j = high;
@@ -82,9 +76,9 @@ public class QuickSortResource {
 			}
  
 			if (i <= j) {
-				int temp = arr[i].intValue();
+				float temp = arr[i];
 				arr[i] = arr[j];
-				arr[j] = Float.intBitsToFloat(temp);
+				arr[j] = temp;
 				i++;
 				j--;
 			}

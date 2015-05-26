@@ -5,14 +5,9 @@
  */
 package ws;
 
-import java.util.ArrayList;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 
@@ -47,10 +42,8 @@ private Float lengths;
         Float[] arregloFlotante = new Float[arreglo.length];
         for (int i = 0; i < arreglo.length; i++) {
             arregloFlotante[i] = Float.parseFloat(arreglo[i]);
-            
-            
         }
-        sorti(arregloFlotante);
+        mergeSort(arregloFlotante);
         String resp = "";
         for (int i = 0; i < arregloFlotante.length; i++) {
             resp = resp + arregloFlotante[i].toString()+";";
@@ -61,46 +54,44 @@ private Float lengths;
     Algoritmo MergeSorte obtenido de:
         http://www.java2novice.com/java-sorting-algorithms/merge-sort/
     */
-    public void sorti(Float floatArray[]){
-        this.arrayF = floatArray;
-        this.lengths = Float.intBitsToFloat(floatArray.length);
-        this.tempMergArry = new Float[lengths.intValue()];
-        Float newLenght = lengths-1;
-        doMergeSort(0, newLenght.intValue());
+    public static void mergeSort( Float a[ ]){
+        Float tmpArray[] = new Float[ a.length ];
+
+        mergeSort( a, tmpArray, 0, a.length - 1 );
     }
-    private void doMergeSort(int lowerIndex, int higherIndex) {
-         
-        if (lowerIndex < higherIndex) {
-            int middle = lowerIndex + (higherIndex - lowerIndex) / 2;
-            // Below step sorts the left side of the array
-            doMergeSort(lowerIndex, middle);
-            // Below step sorts the right side of the array
-            doMergeSort(middle + 1, higherIndex);
-            // Now merge both sides
-            mergePartes(lowerIndex, middle, higherIndex);
+    private static void mergeSort( Float a[ ], Float tmpArray[], int left, int right ){
+        if( left < right )
+        {
+            int center = ( left + right ) / 2;
+            mergeSort( a, tmpArray, left, center );
+            mergeSort( a, tmpArray, center + 1, right );
+            merge( a, tmpArray, left, center + 1, right );
         }
     }
-    private void mergePartes(int lowerIndex, int middle, int higherIndex){
-        for (int i = lowerIndex; i <= higherIndex; i++) {
-            tempMergArry[i] = arrayF[i];
-        }
-        int i = lowerIndex;
-        int j = middle+1;
-        int k= lowerIndex;
-        while(i<= middle && j<= higherIndex){
-            if(tempMergArry[i] <= tempMergArry[j]){
-                arrayF[k] = tempMergArry[i];
-                i++;
-            }else{
-                arrayF[k] = tempMergArry[j];
-                j++;
+
+    private static void merge( Float a[ ], Float tmpArray[], int leftPos, int rightPos, int rightEnd){
+        int leftEnd = rightPos - 1;
+        int tmpPos = leftPos;
+        int numElements = rightEnd - leftPos + 1;
+
+        // Main loop
+        while( leftPos <= leftEnd && rightPos <= rightEnd ){
+            if( a[ leftPos ]<( a[ rightPos ] ) ){
+                tmpArray[ tmpPos++ ] = a[ leftPos++ ];
             }
-            k++;
+            else{
+                tmpArray[ tmpPos++ ] = a[ rightPos++ ];
+            }
         }
-        while(i<=middle){
-            arrayF[k] = tempMergArry[i];
-            k++;
-            i++;
+        while( leftPos <= leftEnd ){    // Copy rest of first half
+            tmpArray[ tmpPos++ ] = a[ leftPos++ ];
+        }
+        while( rightPos <= rightEnd ){  // Copy rest of right half
+            tmpArray[ tmpPos++ ] = a[ rightPos++ ];
+        }
+        // Copy TmpArray back
+        for( int i = 0; i < numElements; i++, rightEnd-- ){
+            a[ rightEnd ] = tmpArray[ rightEnd ];
         }
     }
     /**

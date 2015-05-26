@@ -38,22 +38,14 @@ public class BubbleSortResource {
      * Retrieves representation of an instance of ws.BubbleSortResource
      * @return an instance of java.lang.String
      */
-    @GET
-    @Produces("application/json")
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
-    }
+    
     @POST
     @Produces("application/json")
     public String postJson(String entrada) {
         String[] arreglo = entrada.replace("entrada=", "").replace("%3B", ";").split(";");
         Float[] arregloFlotante = new Float[arreglo.length];
-        //ArrayList<Float> arrayFlotante = new ArrayList<Float>();
         for (int i = 0; i < arreglo.length; i++) {
             arregloFlotante[i] = Float.parseFloat(arreglo[i]);
-            //arrayFlotante.add(Float.parseFloat(arreglo[i]));
-            
         }
         BubbleSort(arregloFlotante);
         String resp = "";

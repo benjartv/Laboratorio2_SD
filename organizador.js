@@ -18,6 +18,7 @@ fs.readFile('datafile.txt', 'utf8', function(err, data) {
 
 
 function rails(metodo, entrada){
+  //Colocar la URL correspondiente al Web Service de Ruby on Rails
   request.post('http://localhost:3000/'+metodo,{form:{str:entrada}},function(err,httpResponse,body){
     console.log("RAILS ")
     resp = body.substr(1,body.length-2).split(",");
@@ -29,6 +30,7 @@ function rails(metodo, entrada){
 }
 
 function puntoNet(metodo, entrada){
+  //Colocar la URL correspondiente al Web Service .NET
   request.post('http://localhost:7000/OrdenarC.asmx/'+metodo,{form:{numeros:entrada, opcion:1}},function(err,httpResponse,body){
     resp = body.replace("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<string xmlns=\"http://tempuri.org/\">","").replace(";</string>","")
     resp = resp.split(";");
@@ -41,8 +43,10 @@ function puntoNet(metodo, entrada){
   })
 }
 
+
 function php(metodo,entrada){
-  request.post('http://localhost/~MacBookPro/api-php/'+metodo+'.php',{form:{numeros:entrada}},function(err,httpResponse,body){
+  //Colocar la URL correspondiente a los metodos de PHP
+  request.post('http://localhost/~MacBookPro/Laboratorio2_SD/PHP/'+metodo+'.php',{form:{numeros:entrada}},function(err,httpResponse,body){
     console.log("PHP ");
     resp = body.substr(1,body.length-2).split(",");
     for(var i = 0 ;i < resp.length; i++){
@@ -53,6 +57,7 @@ function php(metodo,entrada){
 }
 
 function java(metodo, entrada){
+  //Colocar la URL correspondiente al la Aplicación Web de JAVA
   request.post('http://localhost:8080/ServidorJavaWeb/'+metodo,{form:{entrada:entrada}},function(err,httpResponse,body){
     console.log("JAVA ");
     resp = body.substr(0,body.length-1).split(";");
@@ -64,8 +69,9 @@ function java(metodo, entrada){
 }
 
 function django(metodo, entrada){
+  //Colocar la URL correspondiente al Web Service de Python Django
   request.post('http://localhost:8000/'+metodo,{form:{str:entrada}},function(err,httpResponse,body){
-    console.log("Djanguito ");
+    console.log("Django ");
     resp = body.substr(1,body.length-2).split(",");
     for(var i = 0 ;i < resp.length; i++){
        resp[i] = parseFloat(resp[i]);
