@@ -2,17 +2,80 @@ var request = require('request');
 
 
 tipoOrdenamiento= process.argv[2];
+var flag = false;
+var cantidad;
 
 var fs = require('fs');
 var datos;
+var string1 = "";
+var string2 = "";
+var string3 = "";
+var string4 = "";
+var string5 = "";
 fs.readFile('datafile.txt', 'utf8', function(err, data) {
     if( err ){
         console.log(err)
     }
     else{
         datos = data.split("\n");
+        cantidad = datos.length / 5;
+        console.log(cantidad);
+
+        for (var i = 0; i < cantidad; i++) {
+          if (i != cantidad-1){
+            string1 = string1 + datos[i]+ ';';
+          }
+          else{
+            string1 = string1 + datos[i];
+            
+          }  
+        };
+        django(tipoOrdenamiento, string1);
+
+        for (var j = cantidad; j < (cantidad*2); j++) {
+          if (j != cantidad*2-1){
+            string2 = string2 + datos[j]+ ';';
+          }
+          else{
+            string2 = string2 + datos[j];
+            
+          }  
+        };
+        rails(tipoOrdenamiento, string2);
+
+        for (var x = cantidad*2; x < cantidad*3; x++) {
+          if (x != cantidad*3-1){
+            string3 = string3 + datos[x]+ ';';
+          }
+          else{
+            string3 = string3 + datos[x];
+            }
+        };
+        java(tipoOrdenamiento, string3);
+
+        for (var z = cantidad*3; z < cantidad*4; z++) {
+          if (z != cantidad*4-1){
+            string4 = string4 + datos[z]+ ';';
+          }
+          else{
+            string4 = string4 + datos[z];
+            
+          }  
+        };
+        php(tipoOrdenamiento, string4);
+
+        for (var q = cantidad*4; q < datos.length; q++) {
+          if (q != datos.length-1){
+            string5 = string5 + datos[q]+ ';';
+          }
+          else{
+            string5 = string5 + datos[q];
+          }  
+        };
+        puntoNet(tipoOrdenamiento, string5);
+        //console.log(string1);
     }
-    console.log(datos);
+    //console.log(datos);
 });
 
 
@@ -80,12 +143,16 @@ function django(metodo, entrada){
   })
 }
 
+//console.log(string1);
+//rails(tipoOrdenamiento, string1);
 
-php(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
-puntoNet(tipoOrdenamiento,"11.2;21.3;6.3;1.6");
-rails(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
-django(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
-java(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
+// php(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
+// puntoNet(tipoOrdenamiento,"11.2;21.3;6.3;1.6");
+// rails(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
+// django(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
+// java(tipoOrdenamiento, "11.2;21.3;6.3;1.6");
+
+
 
 
 
