@@ -2,7 +2,7 @@ var request = require('request');
 
 
 tipoOrdenamiento= process.argv[2];
-archivo = process.argv[3];
+ws = process.argv[3];
 var flag = false;
 var cantidad;
 
@@ -13,14 +13,128 @@ var string2 = "";
 var string3 = "";
 var string4 = "";
 var string5 = "";
-fs.readFile(archivo, 'utf8', function(err, data) {
+fs.readFile('datafile.txt', 'utf8', function(err, data) {
     if( err ){
         console.log(err)
     }
     else{
         datos = data.split("\n");
-        cantidad = datos.length / 5;
+        cantidad = datos.length / ws;
 
+        if (ws == 1){
+          for (var i = 0; i < cantidad; i++) {
+            if (i != cantidad-1){
+              string1 = string1 + datos[i]+ ';';
+            }
+            else{
+              string1 = string1 + datos[i];
+              
+            }  
+          };
+          django(tipoOrdenamiento, string1);
+        }
+
+        if (ws == 2){
+          for (var i = 0; i < cantidad; i++) {
+            if (i != cantidad-1){
+              string1 = string1 + datos[i]+ ';';
+            }
+            else{
+              string1 = string1 + datos[i];
+              
+            }  
+          };
+          django(tipoOrdenamiento, string1);
+          for (var j = cantidad; j < (cantidad*2); j++) {
+            if (j != cantidad*2-1){
+              string2 = string2 + datos[j]+ ';';
+            }
+            else{
+              string2 = string2 + datos[j];
+              
+            }  
+          };
+          rails(tipoOrdenamiento, string2);
+        }
+
+        if(ws == 3){
+          for (var i = 0; i < cantidad; i++) {
+            if (i != cantidad-1){
+              string1 = string1 + datos[i]+ ';';
+            }
+            else{
+              string1 = string1 + datos[i];
+              
+            }  
+          };
+          django(tipoOrdenamiento, string1);
+
+        for (var j = cantidad; j < (cantidad*2); j++) {
+          if (j != cantidad*2-1){
+            string2 = string2 + datos[j]+ ';';
+          }
+          else{
+            string2 = string2 + datos[j];
+            
+          }  
+        };
+          rails(tipoOrdenamiento, string2);
+
+        for (var x = cantidad*2; x < cantidad*3; x++) {
+          if (x != cantidad*3-1){
+            string3 = string3 + datos[x]+ ';';
+          }
+          else{
+            string3 = string3 + datos[x];
+            }
+        };
+          java(tipoOrdenamiento, string3)
+        }
+        if(ws == 4){
+          for (var i = 0; i < cantidad; i++) {
+          if (i != cantidad-1){
+            string1 = string1 + datos[i]+ ';';
+          }
+          else{
+            string1 = string1 + datos[i];
+            
+          }  
+        };
+        django(tipoOrdenamiento, string1);
+
+        for (var j = cantidad; j < (cantidad*2); j++) {
+          if (j != cantidad*2-1){
+            string2 = string2 + datos[j]+ ';';
+          }
+          else{
+            string2 = string2 + datos[j];
+            
+          }  
+        };
+        rails(tipoOrdenamiento, string2);
+
+        for (var x = cantidad*2; x < cantidad*3; x++) {
+          if (x != cantidad*3-1){
+            string3 = string3 + datos[x]+ ';';
+          }
+          else{
+            string3 = string3 + datos[x];
+            }
+        };
+        java(tipoOrdenamiento, string3);
+
+        for (var z = cantidad*3; z < cantidad*4; z++) {
+          if (z != cantidad*4-1){
+            string4 = string4 + datos[z]+ ';';
+          }
+          else{
+            string4 = string4 + datos[z];
+            
+          }  
+        };
+        php(tipoOrdenamiento, string4);
+        }
+        if(ws==5){
         for (var i = 0; i < cantidad; i++) {
           if (i != cantidad-1){
             string1 = string1 + datos[i]+ ';';
@@ -73,6 +187,7 @@ fs.readFile(archivo, 'utf8', function(err, data) {
           }  
         };
         puntoNet(tipoOrdenamiento, string5);
+      }
         //console.log(string1);
     }
     //console.log(datos);

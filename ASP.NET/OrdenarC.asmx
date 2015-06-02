@@ -88,7 +88,7 @@ public class OrdenarC : System.Web.Services.WebService {
 
         static public void MainMerge(float[] numbers, int left, int mid, int right)
         {
-            float[] temp = new float[25];
+            float[] temp = new float[numbers.Length];
             int i, eol, num, pos;
  
             eol = (mid - 1);
